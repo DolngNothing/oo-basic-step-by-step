@@ -2,7 +2,7 @@ package practice11;
 
 import java.util.LinkedList;
 
-public class Teacher extends Person{
+public class Teacher extends Person implements JoinListener{
     private LinkedList<Klass> klasses;
 
     public Teacher(Integer id, String name, int age) {
@@ -12,6 +12,9 @@ public class Teacher extends Person{
     public Teacher(Integer id, String name, int age, LinkedList<Klass> klasses) {
         super(id, name, age);
         this.klasses = klasses;
+        klasses.forEach(klass -> {
+
+        });
     }
 
     public LinkedList<Klass> getClasses() {
@@ -52,5 +55,10 @@ public class Teacher extends Person{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void update(Student student) {
+        System.out.println(String.format("I am %s. I know Jerry become Leader of Class %s.\n",student.getName(),student.getKlass()));
     }
 }

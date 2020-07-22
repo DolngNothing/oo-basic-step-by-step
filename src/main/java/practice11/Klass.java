@@ -11,6 +11,8 @@ public class Klass {
 
     private List<Student> members =new ArrayList<Student>();
 
+    private final List<JoinListener> joinListeners = new ArrayList<JoinListener>();
+
     public Integer getKlass() {
         return klass;
     }
@@ -41,6 +43,9 @@ public class Klass {
 
     public void appendMember(Student student){
         members.add(student);
+        this.joinListeners.forEach(listener ->{
+            listener.update(student);
+        });
     }
 
     @Override
