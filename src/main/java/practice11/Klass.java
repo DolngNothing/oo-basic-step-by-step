@@ -13,6 +13,8 @@ public class Klass {
 
     private final List<JoinListener> joinListeners = new ArrayList<JoinListener>();
 
+    private final List<AssignListener> assignListeners = new ArrayList<AssignListener>();
+
     public Integer getKlass() {
         return klass;
     }
@@ -43,9 +45,18 @@ public class Klass {
 
     public void appendMember(Student student){
         members.add(student);
+        student.setKlass(this);
         this.joinListeners.forEach(listener ->{
             listener.update(student);
         });
+    }
+
+    public List<JoinListener> getJoinListeners() {
+        return joinListeners;
+    }
+
+    public List<AssignListener> getAssignListeners() {
+        return assignListeners;
     }
 
     @Override
@@ -78,8 +89,13 @@ public class Klass {
     }
 
     public void assignLeader(Student leader){
-        if(members.contains(leader))
+        if(members.contains(leader)){
             this.leader=leader;
+            this.leader.setKlass(this);
+            this.assignListeners.forEach(assignListener -> {
+                assignListener.updateAssignMessage(leader);
+            });
+        }
         else {
             System.out.print("It is not one of us.\n");
         }
