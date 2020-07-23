@@ -44,7 +44,6 @@ public class Klass {
     }
 
     public void appendMember(Student student){
-        members.add(student);
         student.setKlass(this);
         this.joinListeners.forEach(listener ->{
             listener.update(student);
@@ -89,11 +88,11 @@ public class Klass {
     }
 
     public void assignLeader(Student leader){
-        if(members.contains(leader)){
+        if(this==leader.getKlass()){
             this.leader=leader;
             this.leader.setKlass(this);
             this.assignListeners.forEach(assignListener -> {
-                assignListener.updateAssignMessage(leader);
+                assignListener.updateAssignMessage(this);
             });
         }
         else {

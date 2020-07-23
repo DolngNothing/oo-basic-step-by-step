@@ -64,7 +64,7 @@ public class Teacher extends Person implements JoinListener,AssignListener{
     }
 
     @Override
-    public void updateAssignMessage(Student leader) {
-        System.out.printf(String.format("I am %s. I know %s become Leader of Class %s.\n",this.name,leader.getName(),leader.getKlass()));
+    public void updateAssignMessage(Klass leaderClass) {
+        System.out.printf(String.format("I am %s. I know %s become Leader of Class %s.\n",this.name,leaderClass.getLeader().getName(),leaderClass));
     }
 }
